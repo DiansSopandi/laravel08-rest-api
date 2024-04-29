@@ -1,0 +1,16 @@
+GET http://laravel08-rest-api.test/api/posts HTTP/1.1
+
+###
+POST http://laravel08-rest-api.test/api/posts HTTP/1.1
+
+Content-Type: application/json
+
+
+
+{
+
+    "title": "title vsCode test",
+
+    "content": "Lorem vsCode test"
+
+}
