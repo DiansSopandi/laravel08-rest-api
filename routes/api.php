@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostApiController;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -20,30 +21,70 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+// this GET API method below directly use eloquent query
+// Route::get('/posts', function () {
+//     return Post::latest()->get();
+// });
 
-Route::get('/posts', function () {
-    return Post::all();
-});
+// this GET API method use controller
+Route::get('/posts', [PostApiController::class, 'index']);
 
-Route::post('/posts', function () {
-    // $title = $request->input('title');
-    // $content = $request->input('content');
+//this POST API method use controller
+Route::post('/posts', [PostApiController::class, 'store']);
 
-    request()->validate([
-        'title' => 'required',
-        'content' => 'required',
-    ]);
+// this POST API method use closure function
+// Route::post('/posts', function () {
 
-
-    $post =  Post::create([
-        'title' => request('title'), //$title,
-        'content' => request('content'), //$content,
-    ]);
+// request()->validate([
+//     'title' => 'required',
+//     'content' => 'required',
+// ]);
 
 
-    if (request()->expectsJson()) {
-        return response()->json(['message' => 'Post created successfully', 'post' => $post], 201);
-    }
+// $post =  Post::create([
+//     'title' => request('title'), //$title,
+//     'content' => request('content'), //$content,
+// ]);
 
-    return redirect()->route('/tasks');
-});
+
+// if (request()->expectsJson()) {
+//     return response()->json(['message' => 'Post created successfully', 'post' => $post], 201);
+// }
+
+// return redirect()->route('/tasks');
+// });
+
+// this PUT API method use controller
+Route::put('/posts/{post}', [PostApiController::class, 'update']);
+
+// this PUT API method use closure function
+// Route::put('/posts/{id}', function ($id) {
+// Route::put('/posts/{post}', function (Post $post) {
+
+//     // $post = Post::findOrFail($post);
+
+//     request()->validate([
+//         'title' => 'required',
+//         'content' => 'required',
+//     ]);
+
+//     $success = $post->update([
+//         'title' => request('title'),
+//         'content' => request('content'),
+//     ]);
+//     return [
+//         'success' => $success
+//     ];
+// });
+
+// this DELETE API method use controller
+Route::delete('/posts/{post}', [PostApiController::class, 'destroy']);
+
+// this DELETE API method use closure function
+// Route::delete('/posts/{post}', function (Post $post) {
+//     $success = $post->delete();
+
+//     return [
+//         'success' => $success
+//     ];
+// });

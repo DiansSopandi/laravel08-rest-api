@@ -6,7 +6,6 @@ POST http://laravel08-rest-api.test/api/posts HTTP/1.1
 Content-Type: application/json
 
 
-
 {
 
     "title": "title vsCode test",
@@ -14,3 +13,16 @@ Content-Type: application/json
     "content": "Lorem vsCode test"
 
 }
+
+###
+PUT http://laravel08-rest-api.test/api/posts/7 
+
+Content-Type: application/json
+
+{
+    "title": "update title",
+    "content": "update content"
+}
+
+###
+DELETE http://laravel08-rest-api.test/api/posts/7 
